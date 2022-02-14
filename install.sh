@@ -21,7 +21,6 @@ pip install netdisco
 echo "Install pm2 and node-red"
 npm i -g --unsafe-perm pm2 node-red
 echo "Install home-assistant"
-curl -O https://raw.githubusercontent.com/mattiabonzi/droid-assistant/main/requirements.txt
 python -m venv homeassistant
 source homeassistant/bin/activate
 pip install --upgrade pip
