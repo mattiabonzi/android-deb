@@ -33,7 +33,7 @@ pip install atomicwrites==1.4.0
 pip install attrs==21.2.0
 pip install awesomeversion==22.1.0
 pip install bcrypt==3.1.7
-pip install certifi>=2021.5.30
+pip install certifi\>=2021.5.30
 pip install ciso8601==2.2.0
 pip install cryptography==3.3.2
 pip install httpx==0.21.3
@@ -43,7 +43,7 @@ pip install PyJWT==2.1.0
 pip install python-slugify==4.0.1
 pip install pyyaml==6.0
 pip install requests==2.27.1
-pip install typing-extensions<5.0,>=3.10.0.2
+pip install typing-extensions\<5.0,\>=3.10.0.2
 pip install voluptuous==0.12.2
 pip install voluptuous-serialize==2.5.0
 pip install yarl==1.7.2
