@@ -16,9 +16,7 @@ Be sure that your device's screen stays on during the process and activate "unkn
 
 * Download and install [Fdroid](https://f-droid.org/)
 * Search and install "Termux" on Fdroid
-* Open Termux and paste the following:
-
-`curl -O https://raw.githubusercontent.com/mattiabonzi/droid-assistant/main/install.sh && chmod +x ./install.sh && echo "y" | ./install.sh && rm ./install.sh`
+* Open Termux and paste the following: <br>`curl -O https://raw.githubusercontent.com/mattiabonzi/droid-assistant/main/install.sh && chmod +x ./install.sh && echo "y" | ./install.sh && rm ./install.sh`
 * Ignore the `node-pre-gyp` error
 * Take a coffee (the process can take up to 1 hour)
 * Done! You can now connect to (replace 192.168.x.x with your actual IP):
