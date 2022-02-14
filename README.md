@@ -7,9 +7,9 @@ Due to an architectural issue with a dependency (cryptography that requires Rust
 ## Before start
 Be sure that your device's screen stays on during the process and activate "unknow sources" option.
 
-* Enable the "developer mode" ([How to enable "developer mode"](https://www.google.com/search?q=How+to+enable+developer+mode))
+* Enable the "developer mode" ([How to enable "developer mode"](https://www.google.com/search?q=How+to+enable+developer+mode+android))
 * Go to "Developer options" and flag the "Stay awake" option
-* Enable "Unknow sources" installation option ([How to activate "unknow sources"](https://www.google.com/search?q=How+to+enable+unknow+sources))
+* Enable "Unknow sources" installation option ([How to activate "unknow sources"](https://www.google.com/search?q=How+to+enable+unknow+sources+android))
 * Plug the device into a charger
 
 ## Install
