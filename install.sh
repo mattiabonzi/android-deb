@@ -15,7 +15,7 @@ echo "Install dependencies"
 pkg install -y openssh
 echo -e "android\nandroid" | passwd
 sshd
-pkg install -y  libffi openssl coreutils clang python python nano mosquitto nodejs openssh termux-api make curl libjpeg-turbo
+pkg install -y  libffi openssl coreutils clang python python nano mosquitto nodejs openssh termux-api make curl libjpeg-turbo binutils
 pip install --upgrade pip
 pip install netdisco
 echo "Install pm2 and node-red"
