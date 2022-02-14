@@ -51,9 +51,9 @@ echo "cryptography==3.3.2" | constr.txt
 pip install -c constr.txt  hass-nabucasa==0.52.0
 pip install --no-deps homeassistant==2022.2.6
 echo "Start home-assistant"
-pm2 start hass --interpreter=python -- --config /data/data/com.termux/files/home/homeassistant
+pm2 start hass --interpreter=python -- --config /data/data/com.termux/files/home/.homeassistant
 echo "Install home-assistant configurator"
-cd /data/data/com.termux/files/home/homeassistant
+cd /data/data/com.termux/files/home/.homeassistant
 curl -LO https://raw.githubusercontent.com/danielperna84/hass-configurator/master/configurator.py
 chmod 755 configurator.py
 echo "Start mosquitto" 
@@ -61,7 +61,7 @@ pm2 start mosquitto -- -v -c /data/data/com.termux/files/usr/etc/mosquitto/mosqu
 echo "Start node-red"
 pm2 start node-red
 echo "Start configurator"
-pm2 start /data/data/com.termux/files/home/homeassistant/configurator.py
+pm2 start /data/data/com.termux/files/home/.homeassistant/configurator.py
 echo "Add Node-RED and Configurator to HASS sidebar"
 echo "\npanel_iframe:\nconfigurator\n:\ntitle: Configurator\nicon: mdi:wrench\nurl: http://127.0.0.1:3218\nnode_red:\ntitle: Node-RED\nicon: mdi:cogs\nurl: http://127.0.0.1:1880" >> /data/data/com.termux/files/home/homeassistant/configuration.yaml
 echo "\n\n\nDone\n"
