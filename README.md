@@ -9,7 +9,7 @@ Be sure that your device's screen stays on during the process and activate "unkn
 
 * Enable the "developer mode" ([How to enable "developer mode"](https://www.google.com/search?q=How+to+enable+developer+mode+android))
 * Go to "Developer options" and flag the "Stay awake" option
-* Enable "Unknow sources" installation option ([How to activate "unknow sources"](https://www.google.com/search?q=How+to+enable+unknow+sources+android))
+* Enable "Unknow sources" installation option ([How to enable "unknow sources"](https://www.google.com/search?q=How+to+enable+unknow+sources+android))
 * Plug the device into a charger
 
 ## Install
