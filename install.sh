@@ -15,9 +15,8 @@ echo "Install dependencies"
 pkg install -y openssh
 echo -e "android\nandroid" | passwd
 sshd
-pkg install -y  libffi openssl coreutils clang python python nano mosquitto nodejs openssh termux-api make curl
+pkg install -y  libffi openssl coreutils clang python python nano mosquitto nodejs openssh termux-api make curl libjpeg-turbo
 pip install --upgrade pip
-pip install pynacl==1.3.0
 pip install netdisco
 echo "Install pm2 and node-red"
 npm i -g --unsafe-perm pm2 node-red
@@ -47,7 +46,13 @@ pip install typing-extensions\<5.0,\>=3.10.0.2
 pip install voluptuous==0.12.2
 pip install voluptuous-serialize==2.5.0
 pip install yarl==1.7.2
+pip install pynacl==1.4.0
+pip install -I pytz
+echo "cryptography==3.3.2" | constr.txt
+pip install -c constr.txt  hass-nabucasa==0.52.0
 pip install --no-deps homeassistant==2022.2.6
+echo "Start home-assistant"
+pm2 start hass --interpreter=python -- --config /data/data/com.termux/files/home/homeassistant
 echo "Install home-assistant configurator"
 cd /data/data/com.termux/files/home/homeassistant
 curl -LO https://raw.githubusercontent.com/danielperna84/hass-configurator/master/configurator.py
@@ -56,12 +61,10 @@ echo "Start mosquitto"
 pm2 start mosquitto -- -v -c /data/data/com.termux/files/usr/etc/mosquitto/mosquitto.conf
 echo "Start node-red"
 pm2 start node-red
-echo "Start home-assistant"
-pm2 start hass --interpreter=python -- --config /data/data/com.termux/files/home/homeassistant
 echo "Start configurator"
 pm2 start /data/data/com.termux/files/home/homeassistant/configurator.py
 echo "Add Node-RED and Configurator to HASS sidebar"
-echo "\npanel_iframe:\nconfigurator\n:\ntitle: Configurator\nicon: mdi:wrench\nurl: http://x.x.x.x:3218\nnode_red:\ntitle: Node-RED\nicon: mdi:cogs\nurl: http://x.x.x.x:1880" >> /data/data/com.termux/files/home/homeassistant/configuration.yaml
+echo "\npanel_iframe:\nconfigurator\n:\ntitle: Configurator\nicon: mdi:wrench\nurl: http://127.0.0.1:3218\nnode_red:\ntitle: Node-RED\nicon: mdi:cogs\nurl: http://127.0.0.1:1880" >> /data/data/com.termux/files/home/homeassistant/configuration.yaml
 echo "\n\n\nDone\n"
 echo "Script write with <3 by:"
 echo "  ______           __  "
