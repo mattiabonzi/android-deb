@@ -23,7 +23,8 @@ npm i -g --unsafe-perm pm2 node-red
 echo "Install home-assistant"
 python -m venv homeassistant
 source homeassistant/bin/activate
-pip install homeassistant==2021.9.7
+/data/data/com.termux/files/home/.homeassistant/bin/python -m pip install --upgrade pip
+pip install --no-deps -r requirements.txt homeassistant==2022.2.6
 echo "Install home-assistant configurator"
 cd /data/data/com.termux/files/home/.homeassistant
 curl -LO https://raw.githubusercontent.com/danielperna84/hass-configurator/master/configurator.py
