@@ -14,13 +14,14 @@ Be sure that your device's screen stays on during the process and activate "unkn
 
 ## Install
 
-1. Download and install [Fdroid](https://f-droid.org/)
-1. Search and install "Termux" on Fdroid
-1. Open Termux and paste the following:
-1. `curl -O https://raw.githubusercontent.com/mattiabonzi/droid-assistant/main/install.sh && chmod +x ./install.sh && echo "y" | ./install.sh && rm ./install.sh`
-1. Ignore the `node-pre-gyp` error
-1. Take a coffee (the process can take up to 1 hour)
-1. Done! You can now connect to (replace 192.168.x.x with your actual IP):
+* Download and install [Fdroid](https://f-droid.org/)
+* Search and install "Termux" on Fdroid
+* Open Termux and paste the following:
+
+`curl -O https://raw.githubusercontent.com/mattiabonzi/droid-assistant/main/install.sh && chmod +x ./install.sh && echo "y" | ./install.sh && rm ./install.sh`
+* Ignore the `node-pre-gyp` error
+* Take a coffee (the process can take up to 1 hour)
+* Done! You can now connect to (replace 192.168.x.x with your actual IP):
 	* Hass dashboard on `http://192.168.x.x:8123` with your browser
 	* Server console using `ssh admin@192.168.x.x -p 8022` with a terminal
 	* NodeRed dashboard on `http://192.168.x.x:1880`, yuo could acces it from Hass dashboard too.
