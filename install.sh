@@ -14,7 +14,7 @@ pkg update -y
 echo "Install dependencies"
 pkg install -y openssh 
 sshd
-pkg install -y  ibffi openssl coreutils clang python python nano mosquitto nodejs openssh termux-api make curl
+pkg install -y  libffi openssl coreutils clang python python nano mosquitto nodejs openssh termux-api make curl
 pip install --upgrade pip
 pip install pynacl==1.3.0
 pip install netdisco
