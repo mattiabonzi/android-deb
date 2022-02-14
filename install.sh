@@ -52,6 +52,7 @@ pip install -c constr.txt  hass-nabucasa==0.52.0
 pip install --no-deps homeassistant==2022.2.6
 echo "Start home-assistant"
 pm2 start hass --interpreter=python -- --config /data/data/com.termux/files/home/.homeassistant
+sleep 2m
 echo "Install home-assistant configurator"
 cd /data/data/com.termux/files/home/.homeassistant
 curl -LO https://raw.githubusercontent.com/danielperna84/hass-configurator/master/configurator.py
