@@ -75,4 +75,5 @@ echo " /_/  \__,_/\___/_/ /_/ "
 echo "Use Username: 'admin' and Password: 'android' to connect to the device via ssh on local network (port 8022)"
 echo "To check your ip (may vary) go to (on your phone): 'Setting' => 'Device information' => 'Device status' => 'Ip adress'"
 echo "The ssh command should look like this: 'ssh admin@192.168.x.x -p 8022'"
+echo "You should change yor password now: using 'passwd'"
 
