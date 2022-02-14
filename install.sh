@@ -10,7 +10,7 @@ echo " / / / /_/ / /__/ / / / "
 echo " /_/  \__,_/\___/_/ /_/ "
 echo "Be sure that you are connected to internet, and taht you're running Android > 6 (api 24)\nFor more info please visit: "
 echo "Update repo"
-pkg update
+pkg update -y
 echo "Install dependencies"
 pkg install -y openssh 
 sshd
