@@ -47,7 +47,7 @@ pip install voluptuous-serialize==2.5.0
 pip install yarl==1.7.2
 pip install pynacl==1.4.0
 pip install -I pytz
-echo "cryptography==3.3.2" | constr.txt
+echo "cryptography==3.3.2" > constr.txt
 pip install -c constr.txt  hass-nabucasa==0.52.0
 pip install --no-deps homeassistant==2022.2.6
 echo "Start home-assistant"
