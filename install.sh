@@ -49,7 +49,7 @@ pip install pynacl==1.4.0
 pip install -I pytz
 echo "cryptography==3.3.2" > constr.txt
 pip install -c constr.txt  hass-nabucasa==0.52.0
-pip install --no-deps homeassistant==2022.2.6
+pip install --no-deps homeassistant==2021.10.1
 echo "Start home-assistant"
 pm2 start hass --interpreter=python -- --config /data/data/com.termux/files/home/.homeassistant
 sleep 2m
