@@ -48,7 +48,6 @@ pip install voluptuous==0.12.2
 pip install voluptuous-serialize==2.5.0
 pip install yarl==1.7.2
 pip install --no-deps homeassistant==2022.2.6
-rm requirements.txt
 echo "Install home-assistant configurator"
 cd /data/data/com.termux/files/home/homeassistant
 curl -LO https://raw.githubusercontent.com/danielperna84/hass-configurator/master/configurator.py
