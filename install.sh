@@ -2,11 +2,15 @@
 echo "Init"
 clear
 echo "This is just an installer! \nRefer to the documentation of the single sofwtare for any doubt"
-echo "Script write with <3 by:\n\n\n"
-echo "  ______           __  \n /_  __/_  _______/ /_ \n  / / / / / / ___/ __ \\n / / / /_/ / /__/ / / /\n/_/  \__,_/\___/_/ /_/ \n\n\n"
+echo "Script write with <3 by:"
+echo "  ______           __  "
+echo " /_  __/_  _______/ /_ "
+echo " / / / / / / ___/ __ \ "
+echo " / / / /_/ / /__/ / / / "
+echo " /_/  \__,_/\___/_/ /_/ "
 echo "Be sure that you are connected to internet, and taht you're running Android > 6 (api 24)\nFor more info please visit: "
 echo "Update repo"
-pgk update
+pkg update
 echo "Install dependencies"
 pkg install -y openssh 
 sshd
