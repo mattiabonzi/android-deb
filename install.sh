@@ -14,14 +14,14 @@ pkg update -y
 echo "Install dependencies"
 pkg install -y openssh 
 sshd
-pkg install -y  ibffi-dev openssl-dev coreutils clang python python-dev nano mosquitto nodejs openssh termux-api make curl
+pkg install -y  ibffi openssl coreutils clang python python nano mosquitto nodejs openssh termux-api make curl
 pip install --upgrade pip
 pip install pynacl==1.3.0
 pip install netdisco
 echo "Install pm2 and node-red"
 npm i -g --unsafe-perm pm2 node-red
 echo "Install home-assistant"
-python3.9 -m venv homeassistant
+python -m venv homeassistant
 source homeassistant/bin/activate
 pip install homeassistant==2021.9.7
 echo "Install home-assistant configurator"
