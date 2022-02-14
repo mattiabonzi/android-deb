@@ -25,11 +25,32 @@ echo "Install home-assistant"
 curl -O https://raw.githubusercontent.com/mattiabonzi/droid-assistant/main/requirements.txt
 python -m venv homeassistant
 source homeassistant/bin/activate
-/data/data/com.termux/files/home/.homeassistant/bin/python -m pip install --upgrade pip
-pip install --no-deps -r requirements.txt homeassistant==2022.2.6
+pip install --upgrade pip
+pip install aiohttp==3.8.1
+pip install astral==2.2
+pip install async-timeout==4.0.2
+pip install atomicwrites==1.4.0
+pip install attrs==21.2.0
+pip install awesomeversion==22.1.0
+pip install bcrypt==3.1.7
+pip install certifi>=2021.5.30
+pip install ciso8601==2.2.0
+pip install cryptography==3.3.2
+pip install httpx==0.21.3
+pip install ifaddr==0.1.7
+pip install jinja2==3.0.3
+pip install PyJWT==2.1.0
+pip install python-slugify==4.0.1
+pip install pyyaml==6.0
+pip install requests==2.27.1
+pip install typing-extensions<5.0,>=3.10.0.2
+pip install voluptuous==0.12.2
+pip install voluptuous-serialize==2.5.0
+pip install yarl==1.7.2
+pip install --no-deps homeassistant==2022.2.6
 rm requirements.txt
 echo "Install home-assistant configurator"
-cd /data/data/com.termux/files/home/.homeassistant
+cd /data/data/com.termux/files/home/homeassistant
 curl -LO https://raw.githubusercontent.com/danielperna84/hass-configurator/master/configurator.py
 chmod 755 configurator.py
 echo "Start mosquitto" 
@@ -37,11 +58,11 @@ pm2 start mosquitto -- -v -c /data/data/com.termux/files/usr/etc/mosquitto/mosqu
 echo "Start node-red"
 pm2 start node-red
 echo "Start home-assistant"
-pm2 start hass --interpreter=python -- --config /data/data/com.termux/files/home/.homeassistant
+pm2 start hass --interpreter=python -- --config /data/data/com.termux/files/home/homeassistant
 echo "Start configurator"
-pm2 start /data/data/com.termux/files/home/.homeassistant/configurator.py
+pm2 start /data/data/com.termux/files/home/homeassistant/configurator.py
 echo "Add Node-RED and Configurator to HASS sidebar"
-echo "\npanel_iframe:\nconfigurator\n:\ntitle: Configurator\nicon: mdi:wrench\nurl: http://x.x.x.x:3218\nnode_red:\ntitle: Node-RED\nicon: mdi:cogs\nurl: http://x.x.x.x:1880" >> /data/data/com.termux/files/home/.homeassistant/configuration.yaml
+echo "\npanel_iframe:\nconfigurator\n:\ntitle: Configurator\nicon: mdi:wrench\nurl: http://x.x.x.x:3218\nnode_red:\ntitle: Node-RED\nicon: mdi:cogs\nurl: http://x.x.x.x:1880" >> /data/data/com.termux/files/home/homeassistant/configuration.yaml
 echo "\n\n\nDone\n"
 echo "Script write with <3 by:"
 echo "  ______           __  "
