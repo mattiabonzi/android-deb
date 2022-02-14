@@ -4,7 +4,7 @@ This script will install Home Assistant, Node Red And Mosquito on Android device
 Due to an architectural issue with a dependency (cryptography that requires Rust to be compiled on version above 3.4), not all module could be installable at this time.
 
 
-##Before start
+## Before start
 Be sure that your device's screen stays on during the process and activate "unknow sources" option.
 
 * Activate the "developer mode" ([How to enable "developer mode"](https://www.google.com/search?q=How+to+enable+developer+mode))
@@ -12,7 +12,7 @@ Be sure that your device's screen stays on during the process and activate "unkn
 * Activate "Unknow sources" option ([How to activate "unknow sources"](https://www.google.com/search?q=How+to+enable+unknow+sources))
 * Plug the device into a charger
 
-##Install
+## Install
 
 1. Download and install [Fdroid](https://f-droid.org/)
 1. Search and install "Termux" on Fdroid
