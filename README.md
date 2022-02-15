@@ -3,7 +3,7 @@ This script will install Home Assistant, Node Red And Mosquito on Android device
 
 The aim of such software is to reutilize old Android device that are no more useful as phones, but that can live a second life as a smart home hub.
 
-Right now the installation as been tested on 64bit device only, it should work also on 32bit system as long as all dependency are avaible (Not tested).
+Right now the installation as been tested on 64bit device only, it should work also on 32bit (with little changes) system as long as all dependency are avaible (Not tested).
 The target devices must run Android version above 6, otherwise it's not possibile to install termux, which is required to install everything.
 
 Due to architectural issue with some dependency, not all module could be installable at this time, see "Known issue" for more info.
