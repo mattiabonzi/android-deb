@@ -24,31 +24,30 @@ echo "Install home-assistant"
 python -m venv homeassistant
 source homeassistant/bin/activate
 pip install --upgrade pip
-pip install aiohttp==3.8.1
-pip install astral==2.2
-pip install async-timeout==4.0.2
-pip install atomicwrites==1.4.0
+pip install aiohttp==3.7.4.
+pip install post0astral==2.2
+pip install async-timeout==3.0.1
 pip install attrs==21.2.0
-pip install awesomeversion==22.1.0
+pip install awesomeversion==21.8.1
+pip install backports.zoneinfo
 pip install bcrypt==3.1.7
-pip install certifi\>=2021.5.30
+pip install certifi>=2021.5.30
 pip install ciso8601==2.2.0
 pip install cryptography==3.3.2
-pip install httpx==0.21.3
-pip install ifaddr==0.1.7
-pip install jinja2==3.0.3
+pip install typing-extensions\<5.0,\>=3.10.0.2
+pip install httpx==0.19.0
+pip install jinja2==3.0.1
 pip install PyJWT==2.1.0
 pip install python-slugify==4.0.1
-pip install pyyaml==6.0
-pip install requests==2.27.1
-pip install typing-extensions\<5.0,\>=3.10.0.2
+pip install pyyaml==5.4.1
+pip install requests==2.26.0
 pip install voluptuous==0.12.2
-pip install voluptuous-serialize==2.5.0
-pip install yarl==1.7.2
+pip install voluptuous-serialize==2.4.0
+pip install yarl==1.6.3
 pip install pynacl==1.4.0
 pip install -I pytz
 echo "cryptography==3.3.2" > constr.txt
-pip install -c constr.txt  hass-nabucasa==0.52.0
+pip install -c constr.txt  hass-nabucasa==0.50.0
 pip install --no-deps homeassistant==2021.10.1
 echo "Start home-assistant"
 pm2 start hass --interpreter=python -- --config /data/data/com.termux/files/home/.homeassistant
@@ -75,5 +74,5 @@ echo " /_/  \__,_/\___/_/ /_/ "
 echo "Use Username: 'admin' and Password: 'android' to connect to the device via ssh on local network (port 8022)"
 echo "To check your ip (may vary) go to (on your phone): 'Setting' => 'Device information' => 'Device status' => 'Ip adress'"
 echo "The ssh command should look like this: 'ssh admin@192.168.x.x -p 8022'"
-echo "You should change yor password now: using 'passwd'"
+echo "You should change yor password now using 'passwd' (once connted via ssh)"
 
