@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 echo "Init"
 clear
 echo "This is just an installer! \nRefer to the documentation of the single sofwtare for any doubt"
@@ -45,7 +46,6 @@ pip install voluptuous==0.12.2
 pip install voluptuous-serialize==2.5.0
 pip install yarl==1.7.2
 pip install pynacl==1.4.0
-pip install -I pytz
 LDFLAGS="-L/system/lib64/" CFLAGS="-I/data/data/com.termux/files/usr/include/" pip install pillow==8.2.0
 echo "cryptography==3.3.2" > constr.txt
 pip install -c constr.txt  hass-nabucasa==0.52.0
@@ -53,6 +53,7 @@ pip install --no-deps homeassistant==2022.2.6
 echo "Start home-assistant"
 pm2 start hass --interpreter=python -- --config /data/data/com.termux/files/home/.homeassistant
 sleep 2m
+pip install -I pytz
 echo "Install home-assistant configurator"
 cd /data/data/com.termux/files/home/.homeassistant
 curl -LO https://raw.githubusercontent.com/danielperna84/hass-configurator/master/configurator.py
@@ -75,5 +76,5 @@ echo " /_/  \__,_/\___/_/ /_/ "
 echo "Use Username: 'admin' and Password: 'android' to connect to the device via ssh on local network (port 8022)"
 echo "To check your ip (may vary) go to (on your phone): 'Setting' => 'Device information' => 'Device status' => 'Ip adress'"
 echo "The ssh command should look like this: 'ssh admin@192.168.x.x -p 8022'"
-echo "You should change yor password now: using 'passwd'"
+echo "You should change yor password now using 'passwd' (once connted via ssh)"
 
