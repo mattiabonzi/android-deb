@@ -45,13 +45,14 @@ pip install voluptuous==0.12.2
 pip install voluptuous-serialize==2.4.0
 pip install yarl==1.6.3
 pip install pynacl==1.4.0
-pip install -I pytz
+LDFLAGS="-L/system/lib64/" CFLAGS="-I/data/data/com.termux/files/usr/include/" pip install pillow==8.2.0
 echo "cryptography==3.3.2" > constr.txt
 pip install -c constr.txt  hass-nabucasa==0.50.0
 pip install --no-deps homeassistant==2021.10.1
 echo "Start home-assistant"
 pm2 start hass --interpreter=python -- --config /data/data/com.termux/files/home/.homeassistant
 sleep 2m
+pip install -I pytz
 echo "Install home-assistant configurator"
 cd /data/data/com.termux/files/home/.homeassistant
 curl -LO https://raw.githubusercontent.com/danielperna84/hass-configurator/master/configurator.py
