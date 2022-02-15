@@ -65,7 +65,7 @@ pm2 start node-red
 echo "Start configurator"
 pm2 start /data/data/com.termux/files/home/.homeassistant/configurator.py
 echo "Add Node-RED and Configurator to HASS sidebar"
-echo "\npanel_iframe:\nconfigurator\n:\ntitle: Configurator\nicon: mdi:wrench\nurl: http://127.0.0.1:3218\nnode_red:\ntitle: Node-RED\nicon: mdi:cogs\nurl: http://127.0.0.1:1880" >> /data/data/com.termux/files/home/homeassistant/configuration.yaml
+echo -e "\npanel_iframe:\nconfigurator\n:\ntitle: Configurator\nicon: mdi:wrench\nurl: http://127.0.0.1:3218\nnode_red:\ntitle: Node-RED\nicon: mdi:cogs\nurl: http://127.0.0.1:1880" >> /data/data/com.termux/files/home/.homeassistant/configuration.yaml
 
 echo -e "\n\n\a\a\aDone\n\nScript write with <3 by:";
 echo -e "   ______           __  "
