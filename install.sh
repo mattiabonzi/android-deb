@@ -31,7 +31,7 @@ pip install attrs==21.2.0
 pip install awesomeversion==21.8.1
 pip install backports.zoneinfo
 pip install bcrypt==3.1.7
-pip install certifi>=2021.5.30
+pip install certifi\>=2021.5.30
 pip install ciso8601==2.2.0
 pip install cryptography==3.3.2
 pip install typing-extensions\<5.0,\>=3.10.0.2
