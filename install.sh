@@ -38,31 +38,10 @@ echo y | pip install netdisco
 echo "Install pm2 and node-red"
 npm i -g --unsafe-perm node-red
 npm i -g --unsafe-perm pm2 
-echo "Install home-assistant"
-python -m venv homeassistant
-source homeassistant/bin/activate
-pip inistall --upgrade pip
-pip install --upgrade wheel
-pip install hass-nabucasa
-pip install homeassistant
-echo "Start homeassistant for first time to let it configure themself, then stop it (20m)"
-exit 123
-timeout 20m hass
-pip install -I pytz
-echo "Install home-assistant configurator"
-cd /data/data/com.termux/files/home/.homeassistant
-curl -LO https://raw.githubusercontent.com/danielperna84/hass-configurator/master/configurator.py
-chmod 755 configurator.py
-echo "Start home-assistant"
-pm2 start hass --interpreter=python -- --config /data/data/com.termux/files/home/.homeassistant
 echo "Start mosquitto" 
 pm2 start mosquitto -- -v -c /data/data/com.termux/files/usr/etc/mosquitto/mosquitto.conf
 echo "Start node-red"
 pm2 start node-red
-echo "Start configurator"
-pm2 start /data/data/com.termux/files/home/.homeassistant/configurator.py
-echo "Add Node-RED and Configurator to HASS sidebar"
-echo -e "\npanel_iframe:\nconfigurator\n:\ntitle: Configurator\nicon: mdi:wrench\nurl: http://127.0.0.1:3218\nnode_red:\ntitle: Node-RED\nicon: mdi:cogs\nurl: http://127.0.0.1:1880" >> /data/data/com.termux/files/home/.homeassistant/configuration.yaml
 echo "Save pm2 config"
 pm2 save 
 echo "Add pm2 resurrect to bashrc file"
