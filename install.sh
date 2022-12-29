@@ -24,33 +24,9 @@ npm i -g --unsafe-perm pm2 node-red
 echo "Install home-assistant"
 python -m venv homeassistant
 source homeassistant/bin/activate
-pip install --upgrade pip
-pip install --upgrade wheel
-pip install aiohttp==3.7.4.
-pip install post0astral==2.2
-pip install async-timeout==3.0.1
-pip install attrs==21.2.0
-pip install awesomeversion==21.8.1
-pip install backports.zoneinfo
-pip install bcrypt==3.1.7
-pip install certifi>=2021.5.30
-pip install ciso8601==2.2.0
-pip install cryptography==3.3.2
-pip install typing-extensions\<5.0,\>=3.10.0.2
-pip install httpx==0.19.0
-pip install jinja2==3.0.1
-pip install PyJWT==2.1.0
-pip install python-slugify==4.0.1
-pip install pyyaml==5.4.1
-pip install requests==2.26.0
-pip install voluptuous==0.12.2
-pip install voluptuous-serialize==2.4.0
-pip install yarl==1.6.3
-pip install pynacl==1.4.0
-LDFLAGS="-L/system/lib64/" CFLAGS="-I/data/data/com.termux/files/usr/include/" pip install pillow==8.2.0
-echo "cryptography==3.3.2" > constr.txt
-pip install -c constr.txt  hass-nabucasa==0.50.0
-pip install --no-deps homeassistant==2021.10.1
+
+pip install hass-nabucasa
+pip install homeassistant
 echo "Start homeassistant for first time to let it configure themself, then stop it (20m)"
 timeout 20m hass
 pip install -I pytz
