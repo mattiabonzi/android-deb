@@ -17,24 +17,24 @@ echo "Install dependencies"
 pkg install -y openssh
 echo -e "android\nandroid" | passwd
 sshd
-pkg install -y libffi
-pkg install -y openssl
-pkg install -y coreutils
-pkg install -y clang
-pkg install -y python
-pkg install -y python
-pkg install -y nano
-pkg install -y mosquitto
-pkg install -y nodejs
-pkg install -y openssh
-pkg install -y termux-api
-pkg install -y make
-pkg install -y curl
-pkg install -y libjpeg-turbo
-pkg install -y binutils
-pkg install -y ndk-sysroot
-pkg install -y build-essential
-pip install netdisco
+echo y | pkg install -y libffi
+echo y | pkg install -y openssl
+echo y | pkg install -y coreutils
+echo y | pkg install -y clang
+echo y | pkg install -y python
+echo y | pkg install -y python
+echo y | pkg install -y nano
+echo y | pkg install -y mosquitto
+echo y | pkg install -y nodejs
+echo y | pkg install -y openssh
+echo y | pkg install -y termux-api
+echo y | pkg install -y make
+echo y | pkg install -y curl
+echo y | pkg install -y libjpeg-turbo
+echo y | pkg install -y binutils
+echo y | pkg install -y ndk-sysroot
+echo y | pkg install -y build-essential
+echo y | pip install netdisco
 echo "Install pm2 and node-red"
 npm i -g --unsafe-perm node-red
 npm i -g --unsafe-perm pm2 
