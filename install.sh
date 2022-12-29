@@ -17,12 +17,9 @@ echo "Install dependencies"
 pkg install -y openssh
 echo -e "android\nandroid" | passwd
 sshd
-echo y | pkg install -y libffi
+#echo y | pkg install -y libffi
 echo y | pkg install -y openssl
 echo y | pkg install -y coreutils
-echo y | pkg install -y clang
-echo y | pkg install -y python
-echo y | pkg install -y python
 echo y | pkg install -y nano
 echo y | pkg install -y mosquitto
 echo y | pkg install -y nodejs
