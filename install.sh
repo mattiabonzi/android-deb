@@ -47,13 +47,14 @@ pm2 start node-red
 echo "Save pm2 config"
 pm2 save 
 echo "Add pm2 resurrect to boot file"
-echo -e "#!/data/data/com.termux/files/usr/bin/sh \ntermux-wake-lock \n. \$PREFIX/etc/profile \nsshd \npm2 start" > ~/.termux/boot/start.sh
-
-IP="$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')"
+echo -e "#!/data/data/com.termux/files/usr/bin/sh \ntermux-wake-lock \n. \$PREFIX/etc/profile \nsshd \npm2 start all" > ~/.termux/boot/start.sh
 cd ~/.node-red/
 npm install node-red-dashboard
 npm install node-red-contrib-termux-api
 pm2 restart node-red
+
+IP="$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')"
+
 
 
 
