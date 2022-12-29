@@ -20,6 +20,8 @@ sshd
 #echo y | pkg install -y libffi
 echo y | pkg install -y openssl
 echo y | pkg install -y clang
+echo y | pkg install -y python
+echo y | pkg install -y python
 echo y | pkg install -y coreutils
 echo y | pkg install -y nano
 echo y | pkg install -y mosquitto
@@ -42,7 +44,7 @@ pm2 start node-red
 echo "Save pm2 config"
 pm2 save 
 echo "Add pm2 resurrect to bashrc file"
-#TODO
+IP="$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')"
 
 echo -e "\n\n\a\a\aDone\n\nScript write with <3 by:";
 echo -e "   ______           __  "
@@ -52,5 +54,5 @@ echo -e "  / / / /_/ / /__  / / / "
 echo -e " /_/  \__,_/\___/_/ /_/ \n"
 echo -e "Use Username: 'admin' and Password: 'android' to connect to the device via ssh on local network (port 8022)\n
 To check your ip (may vary) go to (on your phone): 'Setting' => 'Device information' => 'Device status' => 'Ip adress'\n
-The ssh command should look like this: 'ssh admin@192.168.x.x -p 8022'\n
+The ssh command should look like this: 'ssh admin@${IP} -p 8022'\n
 You should change yor password now using 'passwd' (once connted via ssh)"
