@@ -17,14 +17,32 @@ echo "Install dependencies"
 pkg install -y openssh
 echo -e "android\nandroid" | passwd
 sshd
-pkg install -y libffi openssl coreutils clang python python nano mosquitto nodejs openssh termux-api make curl libjpeg-turbo binutils ndk-sysroot build-essential
+pkg install -y libffi
+pkg install -y openssl
+pkg install -y coreutils
+pkg install -y clang
+pkg install -y python
+pkg install -y python
+pkg install -y nano
+pkg install -y mosquitto
+pkg install -y nodejs
+pkg install -y openssh
+pkg install -y termux-api
+pkg install -y make
+pkg install -y curl
+pkg install -y libjpeg-turbo
+pkg install -y binutils
+pkg install -y ndk-sysroot
+pkg install -y build-essential
 pip install netdisco
 echo "Install pm2 and node-red"
-npm i -g --unsafe-perm pm2 node-red
+npm i -g --unsafe-perm node-red
+npm i -g --unsafe-perm pm2 
 echo "Install home-assistant"
 python -m venv homeassistant
 source homeassistant/bin/activate
-
+pip inistall --upgrade pip
+pip install --upgrade wheel
 pip install hass-nabucasa
 pip install homeassistant
 echo "Start homeassistant for first time to let it configure themself, then stop it (20m)"
