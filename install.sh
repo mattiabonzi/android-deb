@@ -47,6 +47,7 @@ pm2 start node-red
 echo "Save pm2 config"
 pm2 save 
 echo "Add pm2 resurrect to boot file"
+[ ! -d ~/.termux/boot/ ] && mkdir -p ~/.termux/boot/
 echo -e "#!/data/data/com.termux/files/usr/bin/sh \ntermux-wake-lock \n. \$PREFIX/etc/profile \nsshd \npm2 start all" > ~/.termux/boot/start.sh
 cd ~/.node-red/
 npm install node-red-dashboard
