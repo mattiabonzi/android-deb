@@ -46,6 +46,7 @@ pip install --upgrade wheel
 pip install hass-nabucasa
 pip install homeassistant
 echo "Start homeassistant for first time to let it configure themself, then stop it (20m)"
+exit 123
 timeout 20m hass
 pip install -I pytz
 echo "Install home-assistant configurator"
