@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-echo "Init"
 clear
-echo "This is just an installer! \nRefer to the documentation of the single sofwtare for any doubt"
+termux-wake-lock
+echo "This is just an installer! \nRefer to the documentation of the Node Red for any doubt"
 echo "Script write with <3 by:"
 echo "   ______           __  "
 echo "  /_  __/_  _______/ /_ "
@@ -18,7 +18,7 @@ echo "Ask for storage permissionss"
 termux-setup-storage
 sleep 5
 echo "Install dependencies"
-pkg install -y openssh
+echo y | pkg install -y openssh
 echo -e "android\nandroid" | passwd
 sshd
 echo y | pkg install -y openssl
