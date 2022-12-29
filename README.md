@@ -23,12 +23,11 @@ Be sure that your device's screen stays on during the whole process and activate
 * Search and install "Termux" on Fdroid
 * Open Termux and paste the following:
  ```bash
- curl -O https://raw.githubusercontent.com/mattiabonzi/droid-assistant/main/install.sh && chmod +x ./install.sh && echo "y" | ./install.sh && rm ./install.sh
+ curl -O https://raw.githubusercontent.com/mattiabonzi/droid-assistant/main/install.sh && chmod +x ./install.sh && ./install.sh && rm ./install.sh
  ```
 * Ignore the `node-pre-gyp` error
 * Take a coffee (the process can take up to 1 hour)
 * Done! You can now connect to (replace 192.168.x.x with your actual IP):
-	* Hass dashboard on `http://192.168.x.x:8123` with your browser
 	* Server console using `ssh admin@192.168.x.x -p 8022` with a terminal
 	* NodeRed dashboard on `http://192.168.x.x:1880`, yuo could acces it from Hass dashboard too.
 
