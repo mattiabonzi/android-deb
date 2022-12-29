@@ -52,7 +52,11 @@ echo -e "  /_  __/_  _______/ /_ "
 echo -e "   / / / / / / ___/ __ \ "
 echo -e "  / / / /_/ / /__  / / / "
 echo -e " /_/  \__,_/\___/_/ /_/ \n"
-echo -e "Use Username: 'admin' and Password: 'android' to connect to the device via ssh on local network (port 8022)\n
-To check your ip (may vary) go to (on your phone): 'Setting' => 'Device information' => 'Device status' => 'Ip adress'\n
-The ssh command should look like this: 'ssh admin@${IP} -p 8022'\n
-You should change yor password now using 'passwd' (once connted via ssh)"
+echo -e "Use Username: 'admin' and Password: 'android' to connect to all servuies, you should change this ASAP!\n"
+echo -e "Yout IP should be: ${IP}\n\n"
+echo -e "Online services:\n"
+echo -e "SSH: port 8022 (ssh admin@${IP} -p 8022)\n"
+echo -e "NODE-RED: port 1880\n"
+echo -e "MOSQUITO: port 1883\n"
+
+echo -e "You should change yor password now using 'passwd' (once connted via ssh)"
