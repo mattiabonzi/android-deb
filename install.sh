@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 clear
+set -e
 termux-wake-lock
+termux-setup-storage
+sleep 5
 echo "This is just an installer! \nRefer to the documentation of the Node Red for any doubt"
 echo "Script write with <3 by:"
 echo "   ______           __  "
@@ -29,8 +32,7 @@ curl https://its-pointless.github.io/setup-pointless-repo.sh | bash
 echo y | pkg update
 
 echo "Ask for storage permissionss"
-termux-setup-storage
-sleep 5
+
 
 echo "Configure SSH"
 echo y | pkg install openssh
