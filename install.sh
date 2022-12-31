@@ -12,13 +12,19 @@ echo "Be sure that you are connected to internet, and taht you're running Androi
 echo "Use only thermux veriosn downloaded by f-droid (do not use Play-store)"
 echo "Install also Termux api app from f-droid to use the sensor of the phone isnide node-red"
 echo "Install also Termux boot app from f-droid to launch evetything on startup"
+sleep 2
 
-PM2=
-NODERED=
-MOSQUITO=
+PM2=true
+NODERED=true
+MOSQUITO=true
 HASS=true
+SQUID=
+
+IP="$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')"
 
 echo "Update repo"
+pkg update
+curl https://its-pointless.github.io/setup-pointless-repo.sh | bash
 pkg update
 
 echo "Ask for storage permissionss"
@@ -31,30 +37,28 @@ echo -e "android\nandroid" | passwd
 sshd
 
 echo "Install dependencies"
-echo y | pkg install openssl
-echo y | pkg install clang
-echo y | pkg install python
-echo y | pkg install python
-echo y | pkg install coreutils
-echo y | pkg install nano
-echo y | pkg install nodejs
-echo y | pkg install openssh
-echo y | pkg install termux-api
-echo y | pkg install make
-echo y | pkg install curl
-echo y | pkg install libjpeg-turbo
-echo y | pkg install binutils
-echo y | pkg install ndk-sysroot
-echo y | pkg install build-essential
+#Use a fixed version of python su survive across termux update
+echo y | pkg install wget
+wget https://raw.githubusercontent.com/mattiabonzi/droid-assistant/main/python/python_3.11.1_aarch64.deb
+apt install -y ./python_3.11.1_aarch64.deb
+rm -f python_3.11.1_aarch64.deb
+echo y | pkg install -y openssl
+echo y | pkg install -y clang
+echo y | pkg install -y coreutils
+echo y | pkg install -y nano
+echo y | pkg install -y nodejs
+echo y | pkg install -y openssh
+echo y | pkg install -y termux-api
+echo y | pkg install -y make
+echo y | pkg install -y curl
+echo y | pkg install -y libjpeg-turbo
+echo y | pkg install -y binutils
+echo y | pkg install -y ndk-sysroot
+echo y | pkg install -y build-essential
 
-if [ -n "$NODERED" ] || [ -n "$MOSQUITTO" ];then
-    PM2=true
-fi
+echo "Install pm2"
+npm i -g --unsafe-perm pm2
 
-if [ -n "$PM2" ];then
-    echo "Install pm2"
-    npm i -g --unsafe-perm pm2
-fi
 
 if [ -n "$MOSQUITTO" ];then
     echo "Install and start mosquitto" 
@@ -73,84 +77,100 @@ if [ -n "$NODERED" ];then
     cd ~
 fi
 
-if [ -n "$PM2" ];then
-    echo "Save pm2 config"
-    pm2 save 
-    echo "Add pm2 resurrect to boot file"
-    [ ! -d ~/.termux/boot/ ] && mkdir -p ~/.termux/boot/
-    echo -e "#!/data/data/com.termux/files/usr/bin/sh \ntermux-wake-lock \n. \$PREFIX/etc/profile \nsshd \npm2 start all" > ~/.termux/boot/start.sh
-fi
-
 
 
 if [ -n "$HASS" ];then
+    
+
     #Install homeassistant
+    apt -y install gcc-8
     pip install --upgrade pip
     pip install --upgrade wheel
 
     export CARGO_BUILD_TARGET="aarch64-linux-android"
-    #pkg install python-cryptography
     echo y | pkg install rust
 
     pip install maturin
 
-    pip download orjson==3.8.3
-    tar xf orjson-3.8.3.tar.gz
-    cd orjson-3.8.3/
+    pip download orjson==3.8.1
+    tar xf orjson-3.8.1.tar.gz
+    cd orjson-3.8.1/
     sed -i 's/lto = "thin"/#lto = "thin"/g' Cargo.toml
     maturin build --release --strip
     cd ~
-    rm orjson-3.8.3.tar.gz
-    tar -czf orjson-3.8.3.tar.gz orjson-3.8.3
+    rm orjson-3.8.1.tar.gz
+    tar -czf orjson-3.8.1.tar.gz orjson-3.8.1
 
-    pip download cryptography==38.0.4
-    tar xf cryptography-38.0.4.tar.gz
-    cd cryptography-38.0.4/src/rust/
+    pip download cryptography==38.0.3
+    tar xf cryptography-38.0.3.tar.gz
+    cd cryptography-38.0.3/src/rust/
     sed -i 's/lto = "thin"/#lto = "thin"/g' Cargo.toml
     maturin build --release --strip
     cd ~
-    rm cryptography-38.0.4.tar.gz
-    tar -czf cryptography-38.0.4.tar.gz cryptography-38.0.4
+    rm cryptography-38.0.3.tar.gz
+    tar -czf cryptography-38.0.3.tar.gz cryptography-38.0.3
 
+    curl https://raw.githubusercontent.com/mattiabonzi/droid-assistant/main/hass-requirements.txt -o req.txt
 
     python -m venv homeassistant
     source homeassistant/bin/activate
-
-    printf "aiohttp>=3.8.3\ncryptography>=38.0.4\norjson>=3.8.3" > req.txt
     pip install --upgrade pip
     pip install --upgrade wheel
-    pip install aiohttp
-    pip install orjson-3.8.3.tar.gz
-    pip install cryptography-38.0.4.tar.gz
-    pip install -r req.txt homeassistant
+    MATHLIB="m" pip install numpy==1.23.2
+    pip install tzdata
+    pip install aiohttp==3.8.3
+    pip install orjson-3.8.1.tar.gz
+    pip install cryptography-38.0.3.tar.gz
+    pip install -r req.txt homeassistant==2022.12.2
+    pip install -I pytz
+    echo "Install home-assistant configurator"
+    cd /data/data/com.termux/files/home/.homeassistant
+    curl -LO https://raw.githubusercontent.com/danielperna84/hass-configurator/master/configurator.py
+    chmod 755 configurator.py
+     CONFIG="$(cat <<EOF
+panel_iframe:
+  configurator:
+    title: Configurator
+    icon: mdi:wrench
+    url: http://$IP:3218
+  node_red:
+    title: Node-RED
+    icon: mdi:cogs
+    url: http://$IP:1880
+EOF
+)"
+    printf "$CONFIG" >> ~/.homeassistant/configuration.yaml
+    pm2 start hass --interpreter=python -- --config /data/data/com.termux/files/home/.homeassistant
+    pm2 start /data/data/com.termux/files/home/.homeassistant/configurator.py
+    echo "Hass is installed, it should take some time for configuring itself"
+fi
+
+if [ -n "$SQUID" ];then
+    echo "Install and start squid" 
+    echo y | pkg install squid
+    pm2 start squid
 fi
 
 
 
+echo "Save pm2 config"
+pm2 save 
+echo "Add pm2 resurrect to boot file"
+[ ! -d ~/.termux/boot/ ] && mkdir -p ~/.termux/boot/
+echo -e "#!/data/data/com.termux/files/usr/bin/sh \ntermux-wake-lock \n. \$PREFIX/etc/profile \nsshd \npm2 start all" > ~/.termux/boot/start.sh
 
 
 
 
 
 
-
-
-IP="$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')"
-
-
-
-
-echo -e "\n\n\a\a\aDone\n\nScript write with <3 by:";
-echo -e "   ______           __  "
-echo -e "  /_  __/_  _______/ /_ "
-echo -e "   / / / / / / ___/ __ \ "
-echo -e "  / / / /_/ / /__  / / / "
-echo -e " /_/  \__,_/\___/_/ /_/ \n"
 echo -e "Use Username: 'admin' and Password: 'android' to connect to all servuies, you should change this ASAP!"
 echo -e "Yout IP should be: ${IP}"
 echo -e "Online services:\n"
 echo -e "SSH: port 8022 (use a ssh client) (ssh admin@${IP} -p 8022)\n"
 [ -n "$NODERED" ] && echo -e "NODE-RED: port 1880 (browser) (http://${IP}:1880)\n"
+[ -n "$HASS" ] && echo -e "HASS: port 8123 (browser) (http://${IP}:8123)\n"
 [ -n "$NODERED" ] && echo -e "NODE-RED DASHBOARD: port 1880 (browser) (http://${IP}:1880/ui)\n"
 [ -n "$MOSQUITO" ] && echo -e "MOSQUITO: port 1883 (Mqtt Client)\n"
+[ -n "$SQUID" ] && echo -e "SQUID: port 3128 (Cache proxy)\n"
 echo -e "You should change yor password now using 'passwd' (once connted via ssh)"
