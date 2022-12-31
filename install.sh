@@ -94,16 +94,16 @@ if [ -n "$HASS" ];then
 
     pip install maturin
 
-    pip download orjson==3.7.11
-    tar xvf orjson-3.7.11.tar.gz
-    sed "s/lto=thin/#lto=thin/g" orjson-3.7.11/Cargo.toml > orjson-3.7.11/Cargo.toml
+    pip download orjson==3.8.3
+    tar xvf orjson-3.8.3.tar.gz
+    sed -i 's/lto = "thin"/#lto = "thin"/g' orjson-3.8.3/Cargo.toml
     maturin build --release --strip
-    rm orjson-3.7.11.tar.gz
-    tar -czvf orjson-3.7.11.tar.gz orjson-3.7.11
+    rm orjson-3.8.3.tar.gz
+    tar -czvf orjson-3.8.3.tar.gz orjson-3.8.3
 
     pip download cryptography==38.0.4
     tar xvf cryptography-38.0.4.tar.gz
-    sed "s/lto=thin/#lto=thin/g" cryptography-38.0.4/src/rust/Cargo.toml > cryptography-38.0.4/src/rust/Cargo.toml
+    sed -i 's/lto = "thin"/#lto = "thin"/g' cryptography-38.0.4/src/rust/Cargo.toml
     maturin build --release --strip
     rm cryptography-38.0.4.tar.gz
     tar -czvf cryptography-38.0.4.tar.gz cryptography-38.0.4
@@ -112,7 +112,7 @@ if [ -n "$HASS" ];then
     python -m venv homeassistant
     source homeassistant/bin/activate
 
-    printf "aiohttp>=3.8.3\ncryptography>=38.0.41norjson>=3.7.11" > req.txt
+    printf "aiohttp>=3.8.3\ncryptography>=38.0.41\norjson>=3.8.3" > req.txt
     pip install --upgrade pip
     pip install --upgrade wheel
     pip install aiohttp
