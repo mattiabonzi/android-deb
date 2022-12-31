@@ -21,8 +21,10 @@ msg "Grant permission when asked!"
 sleep 1
 termux-wake-lock
 sleep 5
-termux-setup-storage
-sleep 5
+if [ ! -d ~/storage ];then
+    termux-setup-storage
+    sleep 5
+fi
 
 PM2=true
 NODERED=true
