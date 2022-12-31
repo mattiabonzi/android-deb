@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 clear
 set -e
-termux-wake-lock
-termux-setup-storage
-sleep 5
+
 echo "This is just an installer! \nRefer to the documentation of the Node Red for any doubt"
 echo "Script write with <3 by:"
 echo "   ______           __  "
@@ -15,7 +13,12 @@ echo "Be sure that you are connected to internet, and taht you're running Androi
 echo "Use only thermux veriosn downloaded by f-droid (do not use Play-store)"
 echo "Install also Termux api app from f-droid to use the sensor of the phone isnide node-red"
 echo "Install also Termux boot app from f-droid to launch evetything on startup"
-sleep 2
+echo "Grant permission when asked!"
+sleep 1
+termux-wake-lock
+sleep 5
+termux-setup-storage
+sleep 5
 
 PM2=true
 NODERED=true
@@ -44,6 +47,7 @@ echo "Install dependencies"
 wget https://raw.githubusercontent.com/mattiabonzi/droid-assistant/main/python/python_3.11.1_aarch64.deb
 apt install -y ./python_3.11.1_aarch64.deb
 rm -f python_3.11.1_aarch64.deb
+echo y | apt install -y openssl
 echo y | pkg install -y clang
 echo y | pkg install -y coreutils
 echo y | pkg install -y nano
