@@ -24,6 +24,7 @@ IP="$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*
 
 echo "Update repo"
 echo y | pkg update
+echo y | pkg install -y wget curl
 curl https://its-pointless.github.io/setup-pointless-repo.sh | bash
 echo y | pkg update
 
@@ -38,7 +39,6 @@ sshd
 
 echo "Install dependencies"
 #Use a fixed version of python su survive across termux update
-echo y | pkg install wget
 wget https://raw.githubusercontent.com/mattiabonzi/droid-assistant/main/python/python_3.11.1_aarch64.deb
 apt install -y ./python_3.11.1_aarch64.deb
 rm -f python_3.11.1_aarch64.deb
@@ -50,7 +50,6 @@ echo y | pkg install -y nodejs
 echo y | pkg install -y openssh
 echo y | pkg install -y termux-api
 echo y | pkg install -y make
-echo y | pkg install -y curl
 echo y | pkg install -y libjpeg-turbo
 echo y | pkg install -y binutils
 echo y | pkg install -y ndk-sysroot
@@ -180,4 +179,3 @@ echo -e "SSH: port 8022 (use a ssh client) (ssh admin@${IP} -p 8022)\n"
 [ -n "$MOSQUITO" ] && echo -e "MOSQUITO: port 1883 (Mqtt Client)\n"
 [ -n "$SQUID" ] && echo -e "SQUID: port 3128 (Cache proxy)\n"
 echo -e "You should change yor password now using 'passwd' (once connted via ssh)"
-
