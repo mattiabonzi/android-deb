@@ -39,8 +39,6 @@ echo y | pkg install -y wget curl
 curl https://its-pointless.github.io/setup-pointless-repo.sh | bash
 echo y | pkg update
 
-msg "Ask for storage permissionss"
-
 
 msg "Configure SSH"
 echo y | pkg install openssh
