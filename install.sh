@@ -12,47 +12,122 @@ echo "Be sure that you are connected to internet, and taht you're running Androi
 echo "Use only thermux veriosn downloaded by f-droid (do not use Play-store)"
 echo "Install also Termux api app from f-droid to use the sensor of the phone isnide node-red"
 echo "Install also Termux boot app from f-droid to launch evetything on startup"
+
+PM2=true
+NODERED=true
+MOSQUITO=true
+HASS=true
+
 echo "Update repo"
-pkg update -y
+pkg update
+
 echo "Ask for storage permissionss"
 termux-setup-storage
 sleep 5
-echo "Install dependencies"
-echo y | pkg install -y openssh
+
+echo "Configure SSH"
+echo y | pkg install openssh
 echo -e "android\nandroid" | passwd
 sshd
-echo y | pkg install -y openssl
-echo y | pkg install -y clang
-echo y | pkg install -y python
-echo y | pkg install -y python
-echo y | pkg install -y coreutils
-echo y | pkg install -y nano
-echo y | pkg install -y mosquitto
-echo y | pkg install -y nodejs
-echo y | pkg install -y openssh
-echo y | pkg install -y termux-api
-echo y | pkg install -y make
-echo y | pkg install -y curl
-echo y | pkg install -y libjpeg-turbo
-echo y | pkg install -y binutils
-echo y | pkg install -y ndk-sysroot
-echo y | pkg install -y build-essential
-echo "Install pm2 and node-red"
-npm i -g --unsafe-perm node-red
-npm i -g --unsafe-perm pm2 
-echo "Start mosquitto" 
-pm2 start mosquitto -- -v -c /data/data/com.termux/files/usr/etc/mosquitto/mosquitto.conf
-echo "Start node-red"
-pm2 start node-red
-echo "Save pm2 config"
-pm2 save 
-echo "Add pm2 resurrect to boot file"
-[ ! -d ~/.termux/boot/ ] && mkdir -p ~/.termux/boot/
-echo -e "#!/data/data/com.termux/files/usr/bin/sh \ntermux-wake-lock \n. \$PREFIX/etc/profile \nsshd \npm2 start all" > ~/.termux/boot/start.sh
-cd ~/.node-red/
-npm install node-red-dashboard
-npm install node-red-contrib-termux-api
-pm2 restart node-red
+
+echo "Install dependencies"
+echo y | pkg install openssl
+echo y | pkg install clang
+echo y | pkg install python
+echo y | pkg install python
+echo y | pkg install coreutils
+echo y | pkg install nano
+echo y | pkg install nodejs
+echo y | pkg install openssh
+echo y | pkg install termux-api
+echo y | pkg install make
+echo y | pkg install curl
+echo y | pkg install libjpeg-turbo
+echo y | pkg install binutils
+echo y | pkg install ndk-sysroot
+echo y | pkg install build-essential
+
+if [ -n "$NODERED" ] || [ -n "$MOSQUITTO" ];then
+    PM2=true
+fi
+
+if [ -n "$PM2" ];then
+    echo "Install pm2"
+    npm i -g --unsafe-perm pm2
+fi
+
+if [ -n "$MOSQUITTO" ];then
+    echo "Install and start mosquitto" 
+    echo y | pkg install mosquitto
+    pm2 start mosquitto -- -v -c /data/data/com.termux/files/usr/etc/mosquitto/mosquitto.conf
+fi
+
+if [ -n "$NODERED" ];then
+    echo "Install and  start node-red"
+    npm i -g --unsafe-perm node-red
+    pm2 start node-red
+    cd ~/.node-red/
+    npm install node-red-dashboard
+    npm install node-red-contrib-termux-api
+    pm2 restart node-red
+    cd ~
+fi
+
+if [ -n "$PM2" ];then
+    echo "Save pm2 config"
+    pm2 save 
+    echo "Add pm2 resurrect to boot file"
+    [ ! -d ~/.termux/boot/ ] && mkdir -p ~/.termux/boot/
+    echo -e "#!/data/data/com.termux/files/usr/bin/sh \ntermux-wake-lock \n. \$PREFIX/etc/profile \nsshd \npm2 start all" > ~/.termux/boot/start.sh
+fi
+
+
+
+if [ -n "$HASS" ];then
+    #Install homeassistant
+    pip install --upgrade pip
+    pip install --upgrade wheel
+
+    export CARGO_BUILD_TARGET="aarch64-linux-android"
+    #pkg install python-cryptography
+    echo y | pkg install rust
+
+    pip install maturin
+
+    pip download orjson==3.7.11
+    tar xvf orjson-3.7.11.tar.gz
+    sed "s/lto=thin/#lto=thin/g" orjson-3.7.11/Cargo.toml > orjson-3.7.11/Cargo.toml
+    maturin build --release --strip
+    rm orjson-3.7.11.tar.gz
+    tar -czvf orjson-3.7.11.tar.gz orjson-3.7.11
+
+    pip download cryptography==38.0.4
+    tar xvf cryptography-38.0.4.tar.gz
+    sed "s/lto=thin/#lto=thin/g" cryptography-38.0.4/src/rust/Cargo.toml > cryptography-38.0.4/src/rust/Cargo.toml
+    maturin build --release --strip
+    rm cryptography-38.0.4.tar.gz
+    tar -czvf cryptography-38.0.4.tar.gz cryptography-38.0.4
+
+
+    python -m venv homeassistant
+    source homeassistant/bin/activate
+
+    printf "aiohttp>=3.8.3\ncryptography>=38.0.41norjson>=3.7.11" > req.txt
+    pip install --upgrade pip
+    pip install --upgrade wheel
+    pip install aiohttp
+    pip install -r req.txt homeassistant
+fi
+
+
+
+
+
+
+
+
+
+
 
 IP="$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')"
 
@@ -69,7 +144,7 @@ echo -e "Use Username: 'admin' and Password: 'android' to connect to all servuie
 echo -e "Yout IP should be: ${IP}"
 echo -e "Online services:\n"
 echo -e "SSH: port 8022 (use a ssh client) (ssh admin@${IP} -p 8022)\n"
-echo -e "NODE-RED: port 1880 (browser) (http://${IP}:1880)\n"
-echo -e "NODE-RED DASHBOARD: port 1880 (browser) (http://${IP}:1880/ui)\n"
-echo -e "MOSQUITO: port 1883 (Mqtt Client)\n"
+[ -n "$NODERED" ] && echo -e "NODE-RED: port 1880 (browser) (http://${IP}:1880)\n"
+[ -n "$NODERED" ] && echo -e "NODE-RED DASHBOARD: port 1880 (browser) (http://${IP}:1880/ui)\n"
+[ -n "$MOSQUITO" ] && echo -e "MOSQUITO: port 1883 (Mqtt Client)\n"
 echo -e "You should change yor password now using 'passwd' (once connted via ssh)"
