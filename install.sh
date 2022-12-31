@@ -96,15 +96,19 @@ if [ -n "$HASS" ];then
 
     pip download orjson==3.8.3
     tar xf orjson-3.8.3.tar.gz
-    sed -i 's/lto = "thin"/#lto = "thin"/g' orjson-3.8.3/Cargo.toml
+    cd orjson-3.8.3/
+    sed -i 's/lto = "thin"/#lto = "thin"/g' Cargo.toml
     maturin build --release --strip
+    cd ~
     rm orjson-3.8.3.tar.gz
     tar -czf orjson-3.8.3.tar.gz orjson-3.8.3
 
     pip download cryptography==38.0.4
     tar xf cryptography-38.0.4.tar.gz
-    sed -i 's/lto = "thin"/#lto = "thin"/g' cryptography-38.0.4/src/rust/Cargo.toml
+    cd cryptography-38.0.4/src/rust/
+    sed -i 's/lto = "thin"/#lto = "thin"/g' Cargo.toml
     maturin build --release --strip
+    cd ~
     rm cryptography-38.0.4.tar.gz
     tar -czf cryptography-38.0.4.tar.gz cryptography-38.0.4
 
