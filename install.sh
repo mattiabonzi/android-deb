@@ -23,9 +23,9 @@ SQUID=
 IP="$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')"
 
 echo "Update repo"
-pkg update
+echo y | pkg update
 curl https://its-pointless.github.io/setup-pointless-repo.sh | bash
-pkg update
+echo y | pkg update
 
 echo "Ask for storage permissionss"
 termux-setup-storage
@@ -83,7 +83,7 @@ if [ -n "$HASS" ];then
     
 
     #Install homeassistant
-    apt -y install gcc-8
+    echo y | apt -y install gcc-8
     pip install --upgrade pip
     pip install --upgrade wheel
 
@@ -158,6 +158,12 @@ pm2 save
 echo "Add pm2 resurrect to boot file"
 [ ! -d ~/.termux/boot/ ] && mkdir -p ~/.termux/boot/
 echo -e "#!/data/data/com.termux/files/usr/bin/sh \ntermux-wake-lock \n. \$PREFIX/etc/profile \nsshd \npm2 start all" > ~/.termux/boot/start.sh
+
+
+
+
+
+
 
 
 
