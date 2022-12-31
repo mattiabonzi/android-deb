@@ -23,7 +23,7 @@ Be sure that your device's screen stays on during the whole process and activate
 * Search and install "Termux" on Fdroid
 * Open Termux and paste the following:
  ```bash
- curl -O https://raw.githubusercontent.com/mattiabonzi/droid-assistant/main/install.sh && chmod +x ./install.sh && ./install.sh && rm ./install.sh
+ curl https://raw.githubusercontent.com/mattiabonzi/droid-assistant/main/install.sh | sh
  ```
 * Ignore the `node-pre-gyp` error
 * Take a coffee (the process can take up to 1 hour)
