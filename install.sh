@@ -62,7 +62,7 @@ echo y | pkg install -y ndk-sysroot
 echo y | pkg install -y build-essential
 
 #Use a fixed version of python su survive across termux update
-echo y | apt uninstall -y python
+echo y | pkg uninstall -y python
 wget https://raw.githubusercontent.com/mattiabonzi/droid-assistant/main/python/python_3.11.1_aarch64.deb
 apt install -y ./python_3.11.1_aarch64.deb
 rm -f python_3.11.1_aarch64.deb
