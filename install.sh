@@ -48,11 +48,9 @@ echo -e "android\nandroid" | passwd
 sshd
 
 msg "Install dependencies"
-#Use a fixed version of python su survive across termux update
-wget https://raw.githubusercontent.com/mattiabonzi/droid-assistant/main/python/python_3.11.1_aarch64.deb
-apt install -y ./python_3.11.1_aarch64.deb
-rm -f python_3.11.1_aarch64.deb
 echo y | apt install -y openssl
+echo y | apt install -y python
+echo y | apt install -y python
 echo y | pkg install -y clang
 echo y | pkg install -y coreutils
 echo y | pkg install -y nano
@@ -64,6 +62,12 @@ echo y | pkg install -y libjpeg-turbo
 echo y | pkg install -y binutils
 echo y | pkg install -y ndk-sysroot
 echo y | pkg install -y build-essential
+
+#Use a fixed version of python su survive across termux update
+echo y | apt uninstall -y python
+wget https://raw.githubusercontent.com/mattiabonzi/droid-assistant/main/python/python_3.11.1_aarch64.deb
+apt install -y ./python_3.11.1_aarch64.deb
+rm -f python_3.11.1_aarch64.deb
 
 msg "Install pm2"
 npm i -g --unsafe-perm pm2
@@ -79,7 +83,7 @@ if [ -n "$NODERED" ];then
     msg "Install and  start node-red"
     npm i -g --unsafe-perm node-red
     pm2 start node-red
-    sleep 5
+    sleep 2m
     cd ~/.node-red/
     npm install node-red-dashboard
     npm install node-red-contrib-termux-api
