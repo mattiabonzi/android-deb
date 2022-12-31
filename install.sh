@@ -86,6 +86,7 @@ if [ -n "$NODERED" ];then
     npm install node-red-dashboard
     npm install node-red-contrib-termux-api
     pm2 restart node-red
+    sleep 5
     cd ~
 fi
 
@@ -102,7 +103,7 @@ if [ -n "$HASS" ];then
     export CARGO_BUILD_TARGET="aarch64-linux-android"
     echo y | pkg install rust
 
-    pip install maturin
+    pip install maturin==0.14.8
 
     pip download orjson==3.8.1
     tar xf orjson-3.8.1.tar.gz
