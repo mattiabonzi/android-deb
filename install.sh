@@ -180,3 +180,4 @@ echo -e "SSH: port 8022 (use a ssh client) (ssh admin@${IP} -p 8022)\n"
 [ -n "$MOSQUITO" ] && echo -e "MOSQUITO: port 1883 (Mqtt Client)\n"
 [ -n "$SQUID" ] && echo -e "SQUID: port 3128 (Cache proxy)\n"
 echo -e "You should change yor password now using 'passwd' (once connted via ssh)"
+
