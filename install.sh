@@ -13,9 +13,9 @@ echo "Use only thermux veriosn downloaded by f-droid (do not use Play-store)"
 echo "Install also Termux api app from f-droid to use the sensor of the phone isnide node-red"
 echo "Install also Termux boot app from f-droid to launch evetything on startup"
 
-PM2=true
-NODERED=true
-MOSQUITO=true
+PM2=
+NODERED=
+MOSQUITO=
 HASS=true
 
 echo "Update repo"
