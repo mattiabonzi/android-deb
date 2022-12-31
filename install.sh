@@ -29,8 +29,6 @@ SQUID=
 IP="$(ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1')"
 
 echo "Update repo"
-echo y | apt update -y
-echo y | apt upgrade -y
 echo y | pkg install -y wget curl
 curl https://its-pointless.github.io/setup-pointless-repo.sh | bash
 echo y | pkg update
