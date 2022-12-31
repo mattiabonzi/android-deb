@@ -44,7 +44,6 @@ echo "Install dependencies"
 wget https://raw.githubusercontent.com/mattiabonzi/droid-assistant/main/python/python_3.11.1_aarch64.deb
 apt install -y ./python_3.11.1_aarch64.deb
 rm -f python_3.11.1_aarch64.deb
-echo y | pkg install -y openssl
 echo y | pkg install -y clang
 echo y | pkg install -y coreutils
 echo y | pkg install -y nano
